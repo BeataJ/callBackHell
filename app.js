@@ -16,10 +16,13 @@ const btn = document.querySelector("button");
 //   }, 1000);
 // }, 1000);
 
-const moveX = (element, amount, delay) => {
+const moveX = (element, amount, delay, callback) => {
   setTimeout(() => {
     element.style.transform = `translateX(${amount}px)`;
+    callback();
   }, delay);
 };
 
-moveX(btn, 600, 2000);
+moveX(btn, 100, 2000, () => {
+  moveX(btn, 400, 1000);
+});
