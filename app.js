@@ -16,26 +16,39 @@ const btn = document.querySelector("button");
 //   }, 1000);
 // }, 1000);
 
-const moveX = (element, amount, delay, callback) => {
+const moveX = (element, amount, delay, onSuccess, onFailure) => {
   const bodyBoundary = document.body.clientWidth;
   const elRight = element.getBoundingClientRect().right;
   const currLeft = element.getBoundingClientRect().left;
   if (elRight + amount > bodyBoundary) {
     console.log("DONE!");
+    onFailure();
   } else {
     setTimeout(() => {
       element.style.transform = `translateX(${currLeft + amount}px)`;
-      if (callback) callback();
+      onSuccess();
     }, delay);
   }
 };
 
-moveX(btn, 100, 2000, () => {
-  moveX(btn, 100, 1000, () => {
-    moveX(btn, 100, 1000, () => {
-      moveX(btn, 100, 1000, () => {
-        moveX(btn, 500, 1000);
-      });
-    });
-  });
-});
+// moveX(btn, 100, 2000, () => {
+//   moveX(btn, 100, 1000, () => {
+//     moveX(btn, 100, 1000, () => {
+//       moveX(btn, 100, 1000, () => {
+//         moveX(btn, 500, 1000);
+//       });
+//     });
+//   });
+// });
+
+moveX(
+  btn,
+  100,
+  1000,
+  () => {
+    // success
+  },
+  () => {
+    alert("Cannot move");
+  }
+);
