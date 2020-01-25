@@ -17,6 +17,8 @@ const btn = document.querySelector("button");
 // }, 1000);
 
 const moveX = (element, amount, delay, callback) => {
+  const bodyBoundary = document.body.clientWidth;
+  const elRight = element.getBoundingClientRect().right;
   setTimeout(() => {
     element.style.transform = `translateX(${amount}px)`;
     if (callback) callback();
