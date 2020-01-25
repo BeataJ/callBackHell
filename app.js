@@ -19,16 +19,21 @@ const btn = document.querySelector("button");
 const moveX = (element, amount, delay, callback) => {
   const bodyBoundary = document.body.clientWidth;
   const elRight = element.getBoundingClientRect().right;
-  setTimeout(() => {
-    element.style.transform = `translateX(${amount}px)`;
-    if (callback) callback();
-  }, delay);
+  const currLeft = element.getBoundingClientRect().left;
+  if (elRight + amount > bodyBoundary) {
+    console.log("DONE!");
+  } else {
+    setTimeout(() => {
+      element.style.transform = `translateX(${currLeft + amount}px)`;
+      if (callback) callback();
+    }, delay);
+  }
 };
 
 moveX(btn, 100, 2000, () => {
-  moveX(btn, 200, 1000, () => {
-    moveX(btn, 300, 1000, () => {
-      moveX(btn, 400, 1000, () => {
+  moveX(btn, 100, 1000, () => {
+    moveX(btn, 100, 1000, () => {
+      moveX(btn, 100, 1000, () => {
         moveX(btn, 500, 1000);
       });
     });
